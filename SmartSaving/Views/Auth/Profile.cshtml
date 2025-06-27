@@ -34,28 +34,31 @@
                     <h2 class="text-lg font-medium text-gray-900 mb-4">Profile Information</h2>
 
                     <form action="@Url.Action("Profile", "Auth")" method="post" class="space-y-4">
-                        @Html.AntiForgeryToken()
+                        <input name="__RequestVerificationToken" type="hidden" value="">
 
                         <div>
                             <label for="Name" class="block text-sm font-medium text-gray-700">Full Name</label>
                             <div class="mt-1">
-                                @Html.TextBoxFor(m => m.Name, new {
-                                        @class = "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                        required = "required"
-                                    })
-                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-red-600 text-sm mt-1" })
+                                <input type="text"
+                                       id="Name"
+                                       name="Name"
+                                       class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                       required
+                                       value="@Model.Name">
+                                <div class="text-red-600 text-sm mt-1"></div>
                             </div>
                         </div>
 
                         <div>
                             <label for="Email" class="block text-sm font-medium text-gray-700">Email Address</label>
                             <div class="mt-1">
-                                @Html.TextBoxFor(m => m.Email, new {
-                                        @class = "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                        type = "email",
-                                        required = "required"
-                                    })
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-red-600 text-sm mt-1" })
+                                <input type="email"
+                                       id="Email"
+                                       name="Email"
+                                       class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                       required
+                                       value="@Model.Email">
+                                <div class="text-red-600 text-sm mt-1"></div>
                             </div>
                         </div>
 
@@ -73,9 +76,9 @@
                     <h2 class="text-lg font-medium text-gray-900 mb-4">Change Password</h2>
 
                     <form action="@Url.Action("Profile", "Auth")" method="post" class="space-y-4">
-                        @Html.AntiForgeryToken()
-                        @Html.HiddenFor(m => m.Name)
-                        @Html.HiddenFor(m => m.Email)
+                        <input name="__RequestVerificationToken" type="hidden" value="">
+                        <input type="hidden" id="Name" name="Name" value="@Model.Name">
+                        <input type="hidden" id="Email" name="Email" value="@Model.Email">
 
                         <div>
                             <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>

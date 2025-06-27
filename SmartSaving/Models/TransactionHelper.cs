@@ -26,6 +26,7 @@ namespace SmartSaving.Models {
                 transaction.TransactionType = (Transaction.TransactionTypes)Convert.ToByte(row["idTransactionType"]);
                 transaction.GuidTracker = row["guidTracker"].ToString();
                 transaction.Date = Convert.ToDateTime(row["date"]);
+                transaction.Description = row["description"].ToString();
 
                 exitList.Add(transaction);
             }
@@ -55,6 +56,7 @@ namespace SmartSaving.Models {
                 transaction.TransactionType = (Transaction.TransactionTypes)Convert.ToByte(row["idTransactionType"]);
                 transaction.GuidTracker = row["guidTracker"].ToString();
                 transaction.Date = Convert.ToDateTime(row["date"]);
+                transaction.Description = row["description"].ToString();
 
                 exitList.Add(transaction);
             }
@@ -84,6 +86,7 @@ namespace SmartSaving.Models {
                 transaction.TransactionType = (Transaction.TransactionTypes)Convert.ToByte(row["idTransactionType"]);
                 transaction.GuidTracker = row["guidTracker"].ToString();
                 transaction.Date = Convert.ToDateTime(row["date"]);
+                transaction.Description = row["description"].ToString();
 
                 exitList.Add(transaction);
             }
@@ -136,6 +139,7 @@ namespace SmartSaving.Models {
                 transaction.TransactionType = (Transaction.TransactionTypes)Convert.ToByte(row["idTransactionType"]);
                 transaction.GuidTracker = row["guidTracker"].ToString();
                 transaction.Date = Convert.ToDateTime(row["date"]);
+                transaction.Description = row["description"].ToString();
 
                 return transaction;
             }
@@ -157,6 +161,7 @@ namespace SmartSaving.Models {
             command.Parameters.AddWithValue("@IdTransactionType", (byte)transactionToStore.TransactionType);
             command.Parameters.AddWithValue("@GuidTracker", transactionToStore.GuidTracker);
             command.Parameters.AddWithValue("@Date", transactionToStore.Date);
+            command.Parameters.AddWithValue("@Description", transactionToStore.Description ?? "");
 
             try {
                 connection.Open();
@@ -185,6 +190,7 @@ namespace SmartSaving.Models {
             transactionToSave.TransactionType = transactionToUpdate.TransactionType;
             transactionToSave.GuidTracker = transactionToUpdate.GuidTracker;
             transactionToSave.Date = transactionToUpdate.Date;
+            transactionToSave.Description = transactionToUpdate.Description;
 
             SqlCommand command = new SqlCommand();
             SqlConnection connection = new SqlConnection(Conector);
@@ -198,6 +204,7 @@ namespace SmartSaving.Models {
             command.Parameters.AddWithValue("@IdTransactionType", (byte)transactionToSave.TransactionType);
             command.Parameters.AddWithValue("@GuidTracker", transactionToSave.GuidTracker);
             command.Parameters.AddWithValue("@Date", transactionToSave.Date);
+            command.Parameters.AddWithValue("@Description", transactionToSave.Description ?? "");
 
             try {
                 connection.Open();
