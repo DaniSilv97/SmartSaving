@@ -15,7 +15,7 @@
     <div class="bg-white shadow-lg rounded-lg p-8">
         <form action="@Url.Action("AddTransaction", "Tracker", new { trackerId = ViewBag.TrackerId })" method="post" class="space-y-6">
             <input name="__RequestVerificationToken" type="hidden" value="">
-            <input type="hidden" id="GuidTracker" name="GuidTracker" value="">
+            <input type="hidden" id="GuidTracker" name="GuidTracker" value="@ViewBag.TrackerId">
 
             <!-- Transaction Type -->
             <div>

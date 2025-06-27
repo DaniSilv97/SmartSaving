@@ -107,50 +107,63 @@ namespace SmartSaving.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Profile(User updatedUser, string newPassword, string confirmPassword) {
+        public IActionResult Profile(IFormCollection form, string newPassword, string confirmPassword) {
             if (!IsAuthenticated()) {
                 return RedirectToLogin();
             }
 
-            if (ModelState.IsValid) {
-                UserHelper userHelper = new UserHelper();
+            UserHelper userHelper = new UserHelper();
+            User existingUser = userHelper.get(_auth.GuidUser);
 
-                // Update basic info
-                updatedUser.Role = _auth.Role; // Keep existing role
+            if (existingUser == null) {
+                ViewBag.Error = "User not found.";
+                return View(_auth);
+            }
 
-                // Handle password change
+            try {
+                // Apply updates safely with validation
+                string name = form["Name"];
+                string email = form["Email"];
+
+                existingUser.Name = name;
+                existingUser.Email = email;
+
+                // Password change, if applicable
                 if (!string.IsNullOrWhiteSpace(newPassword)) {
                     if (newPassword != confirmPassword) {
                         ViewBag.Error = "New passwords do not match.";
-                        return View(_auth);
+                        return View(existingUser);
                     }
-                    updatedUser.Password = newPassword;
+
+                    existingUser.Password = newPassword;
                 }
 
-                try {
-                    if (userHelper.update(updatedUser, _auth.GuidUser)) {
-                        // Update session with new user data
-                        User? refreshedUser = userHelper.get(_auth.GuidUser);
-                        if (refreshedUser != null) {
-                            refreshedUser.Password = ""; // Clear password for security
-                            HttpContext.Session.SetString("AccessUser", userHelper.serializeUser(refreshedUser));
-                        }
+                // Preserve role
+                existingUser.Role = _auth.Role;
 
-                        ViewBag.Success = "Profile updated successfully.";
-                        return View(refreshedUser);
+                if (userHelper.update(existingUser, _auth.GuidUser)) {
+                    User refreshedUser = userHelper.get(_auth.GuidUser);
+                    if (refreshedUser != null) {
+                        refreshedUser.Password = "";
+                        HttpContext.Session.SetString("AccessUser", userHelper.serializeUser(refreshedUser));
                     }
-                    else {
-                        ViewBag.Error = "An error occurred while updating your profile.";
-                        return View(_auth);
-                    }
+
+                    ViewBag.Success = "Profile updated successfully.";
+                    return View(refreshedUser);
                 }
-                catch (Exception ex) {
-                    ViewBag.Error = ex.Message;
-                    return View(_auth);
+                else {
+                    ViewBag.Error = "Failed to update profile.";
+                    return View(existingUser);
                 }
             }
-
-            return View(_auth);
+            catch (ArgumentException ex) {
+                ViewBag.Error = ex.Message;
+                return View(_auth);
+            }
+            catch (Exception ex) {
+                ViewBag.Error = "Unexpected error: " + ex.Message;
+                return View(_auth);
+            }
         }
     }
 }

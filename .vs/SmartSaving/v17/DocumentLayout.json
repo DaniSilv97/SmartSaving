@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\views\\auth\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\views\\auth\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\views\\tracker\\edittransaction.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\views\\tracker\\edittransaction.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\views\\tracker\\addtransaction.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\views\\tracker\\addtransaction.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\views\\tracker\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\views\\tracker\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\models\\transactionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\models\\transactionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|c:\\users\\dani\\documents\\istec\\2_semestre\\ti_iii\\asp.net\\smartsaving\\smartsaving\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1B58DBED-9FF6-4242-AA18-934565E2C243}|SmartSaving\\SmartSaving.csproj|solutionrelative:smartsaving\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,97 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Auth\\Login.cshtml",
-              "RelativeDocumentMoniker": "SmartSaving\\Views\\Auth\\Login.cshtml",
-              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Auth\\Login.cshtml",
-              "RelativeToolTip": "SmartSaving\\Views\\Auth\\Login.cshtml",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAwwHoAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T14:19:29.915Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Profile.cshtml",
-              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Auth\\Profile.cshtml",
-              "RelativeDocumentMoniker": "SmartSaving\\Views\\Auth\\Profile.cshtml",
-              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Auth\\Profile.cshtml",
-              "RelativeToolTip": "SmartSaving\\Views\\Auth\\Profile.cshtml",
-              "ViewState": "AgIAAMEAAAAAAAAAAAAwwOcAAAABAAAAAAAAAA==",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "SmartSaving\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "SmartSaving\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAFMBAAAAAAAAAAAwwHkBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T14:18:22.413Z",
+              "WhenOpened": "2025-06-27T17:04:50.936Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Auth\\Register.cshtml",
-              "RelativeDocumentMoniker": "SmartSaving\\Views\\Auth\\Register.cshtml",
-              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Auth\\Register.cshtml",
-              "RelativeToolTip": "SmartSaving\\Views\\Auth\\Register.cshtml",
-              "ViewState": "AgIAAPQAAAAAAAAAAAAwwAoBAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T14:17:10.634Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AddTransaction.cshtml",
-              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Tracker\\AddTransaction.cshtml",
-              "RelativeDocumentMoniker": "SmartSaving\\Views\\Tracker\\AddTransaction.cshtml",
-              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Tracker\\AddTransaction.cshtml",
-              "RelativeToolTip": "SmartSaving\\Views\\Tracker\\AddTransaction.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T14:15:14.017Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TransactionHelper.cs",
-              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Models\\TransactionHelper.cs",
-              "RelativeDocumentMoniker": "SmartSaving\\Models\\TransactionHelper.cs",
-              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Models\\TransactionHelper.cs",
-              "RelativeToolTip": "SmartSaving\\Models\\TransactionHelper.cs",
-              "ViewState": "AgIAAD8BAAAAAAAAAAAiwEUBAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "SmartSaving\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "SmartSaving\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAgwAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T14:00:58.429Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EditTransaction.cshtml",
-              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Tracker\\EditTransaction.cshtml",
-              "RelativeDocumentMoniker": "SmartSaving\\Views\\Tracker\\EditTransaction.cshtml",
-              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Tracker\\EditTransaction.cshtml",
-              "RelativeToolTip": "SmartSaving\\Views\\Tracker\\EditTransaction.cshtml",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAAABUAAABkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T13:43:20.904Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Tracker\\Create.cshtml",
-              "RelativeDocumentMoniker": "SmartSaving\\Views\\Tracker\\Create.cshtml",
-              "ToolTip": "C:\\Users\\Dani\\Documents\\Istec\\2_Semestre\\TI_III\\Asp.Net\\SmartSaving\\SmartSaving\\Views\\Tracker\\Create.cshtml",
-              "RelativeToolTip": "SmartSaving\\Views\\Tracker\\Create.cshtml",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAAA8AAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T13:33:35.789Z",
+              "WhenOpened": "2025-06-27T17:04:50.019Z",
               "EditorCaption": ""
             }
           ]

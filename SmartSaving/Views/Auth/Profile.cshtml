@@ -28,99 +28,93 @@
 
         <!-- Profile Content -->
         <div class="px-6 py-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Update Profile Information -->
-                <div>
-                    <h2 class="text-lg font-medium text-gray-900 mb-4">Profile Information</h2>
+            <!-- Single Form for Both Profile and Password -->
+            <form action="@Url.Action("Profile", "Auth")" method="post" class="space-y-6">
+                <input name="__RequestVerificationToken" type="hidden" value="">
+                <input type="hidden" name="GuidUser" value="@Model.GuidUser">
 
-                    <form action="@Url.Action("Profile", "Auth")" method="post" class="space-y-4">
-                        <input name="__RequestVerificationToken" type="hidden" value="">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Profile Information -->
+                    <div>
+                        <h2 class="text-lg font-medium text-gray-900 mb-4">Profile Information</h2>
 
-                        <div>
-                            <label for="Name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                            <div class="mt-1">
-                                <input type="text"
-                                       id="Name"
-                                       name="Name"
-                                       class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                       required
-                                       value="@Model.Name">
-                                <div class="text-red-600 text-sm mt-1"></div>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="Name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                <div class="mt-1">
+                                    <input type="text"
+                                           id="Name"
+                                           name="Name"
+                                           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                           required
+                                           value="@Model.Name">
+                                    <div class="text-red-600 text-sm mt-1"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="Email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                                <div class="mt-1">
+                                    <input type="email"
+                                           id="Email"
+                                           name="Email"
+                                           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                           required
+                                           value="@Model.Email">
+                                    <div class="text-red-600 text-sm mt-1"></div>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div>
-                            <label for="Email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                            <div class="mt-1">
-                                <input type="email"
-                                       id="Email"
-                                       name="Email"
-                                       class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                       required
-                                       value="@Model.Email">
-                                <div class="text-red-600 text-sm mt-1"></div>
+                    <!-- Change Password -->
+                    <div>
+                        <h2 class="text-lg font-medium text-gray-900 mb-4">Change Password</h2>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
+                                <div class="mt-1 relative">
+                                    <input type="password" id="newPassword" name="newPassword"
+                                           class="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                           placeholder="Enter new password">
+                                    <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePasswordField('newPassword')">
+                                        <svg class="h-5 w-5 text-gray-400" id="newPassword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="mt-1 text-xs text-gray-500">Leave blank to keep current password</p>
+                            </div>
+
+                            <div>
+                                <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+                                <div class="mt-1 relative">
+                                    <input type="password" id="confirmPassword" name="confirmPassword"
+                                           class="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                           placeholder="Confirm new password">
+                                    <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePasswordField('confirmPassword')">
+                                        <svg class="h-5 w-5 text-gray-400" id="confirmPassword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div id="password-match-message" class="text-sm mt-1"></div>
                             </div>
                         </div>
-
-                        <div>
-                            <button type="submit"
-                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out">
-                                Update Profile
-                            </button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
 
-                <!-- Change Password -->
-                <div>
-                    <h2 class="text-lg font-medium text-gray-900 mb-4">Change Password</h2>
-
-                    <form action="@Url.Action("Profile", "Auth")" method="post" class="space-y-4">
-                        <input name="__RequestVerificationToken" type="hidden" value="">
-                        <input type="hidden" id="Name" name="Name" value="@Model.Name">
-                        <input type="hidden" id="Email" name="Email" value="@Model.Email">
-
-                        <div>
-                            <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
-                            <div class="mt-1 relative">
-                                <input type="password" id="newPassword" name="newPassword"
-                                       class="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                       placeholder="Enter new password">
-                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePasswordField('newPassword')">
-                                    <svg class="h-5 w-5 text-gray-400" id="newPassword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <p class="mt-1 text-xs text-gray-500">Leave blank to keep current password</p>
-                        </div>
-
-                        <div>
-                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
-                            <div class="mt-1 relative">
-                                <input type="password" id="confirmPassword" name="confirmPassword"
-                                       class="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                       placeholder="Confirm new password">
-                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePasswordField('confirmPassword')">
-                                    <svg class="h-5 w-5 text-gray-400" id="confirmPassword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div id="password-match-message" class="text-sm mt-1"></div>
-                        </div>
-
-                        <div>
-                            <button type="submit" id="change-password-btn"
-                                    class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
-                                Change Password
-                            </button>
-                        </div>
-                    </form>
+                <!-- Single Submit Button -->
+                <div class="flex justify-center pt-6">
+                    <button type="submit" id="update-profile-btn"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                        Update Profile
+                    </button>
                 </div>
-            </div>
+            </form>
 
             <!-- Account Information -->
             <div class="mt-8 pt-8 border-t border-gray-200">
@@ -147,86 +141,86 @@
 </div>
 
 @section Scripts {
-    <script>
-        // Password field toggle functionality
-        function togglePasswordField(fieldId) {
-            const field = document.getElementById(fieldId);
-            const icon = document.getElementById(fieldId + '-icon');
+        <script>
+            // Password field toggle functionality
+            function togglePasswordField(fieldId) {
+                const field = document.getElementById(fieldId);
+                const icon = document.getElementById(fieldId + '-icon');
 
-            if (field.type === 'password') {
-                field.type = 'text';
-                icon.innerHTML = `
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
-                `;
-            } else {
-                field.type = 'password';
-                icon.innerHTML = `
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                `;
-            }
-        }
-
-        // Password match validation for profile page
-        function checkPasswordMatch() {
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const messageDiv = document.getElementById('password-match-message');
-            const changeBtn = document.getElementById('change-password-btn');
-
-            if (confirmPassword.length === 0 && newPassword.length === 0) {
-                messageDiv.textContent = '';
-                changeBtn.disabled = false;
-                return;
-            }
-
-            if (newPassword.length > 0 && confirmPassword.length === 0) {
-                messageDiv.textContent = 'Please confirm your password';
-                messageDiv.className = 'text-sm mt-1 text-yellow-600';
-                changeBtn.disabled = true;
-                return;
-            }
-
-            if (newPassword === confirmPassword) {
-                messageDiv.textContent = 'Passwords match ✓';
-                messageDiv.className = 'text-sm mt-1 text-green-600';
-                changeBtn.disabled = false;
-            } else {
-                messageDiv.textContent = 'Passwords do not match';
-                messageDiv.className = 'text-sm mt-1 text-red-600';
-                changeBtn.disabled = true;
-            }
-        }
-
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            const newPasswordField = document.getElementById('newPassword');
-            const confirmPasswordField = document.getElementById('confirmPassword');
-
-            // Password match checking
-            newPasswordField.addEventListener('input', checkPasswordMatch);
-            confirmPasswordField.addEventListener('input', checkPasswordMatch);
-
-            // Form validation for password change
-            const passwordForm = document.querySelector('form:nth-of-type(2)');
-            passwordForm.addEventListener('submit', function(e) {
-                const newPassword = newPasswordField.value;
-                const confirmPassword = confirmPasswordField.value;
-
-                if (newPassword.length > 0) {
-                    if (newPassword !== confirmPassword) {
-                        e.preventDefault();
-                        alert('Passwords do not match!');
-                        return false;
-                    }
-
-                    if (newPassword.length < 6) {
-                        e.preventDefault();
-                        alert('Password must be at least 6 characters long!');
-                        return false;
-                    }
+                if (field.type === 'password') {
+                    field.type = 'text';
+                    icon.innerHTML = `
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                    `;
+                } else {
+                    field.type = 'password';
+                    icon.innerHTML = `
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    `;
                 }
+            }
+
+            // Password match validation for profile page
+            function checkPasswordMatch() {
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const messageDiv = document.getElementById('password-match-message');
+                const updateBtn = document.getElementById('update-profile-btn');
+
+                if (confirmPassword.length === 0 && newPassword.length === 0) {
+                    messageDiv.textContent = '';
+                    updateBtn.disabled = false;
+                    return;
+                }
+
+                if (newPassword.length > 0 && confirmPassword.length === 0) {
+                    messageDiv.textContent = 'Please confirm your password';
+                    messageDiv.className = 'text-sm mt-1 text-yellow-600';
+                    updateBtn.disabled = true;
+                    return;
+                }
+
+                if (newPassword === confirmPassword) {
+                    messageDiv.textContent = 'Passwords match ✓';
+                    messageDiv.className = 'text-sm mt-1 text-green-600';
+                    updateBtn.disabled = false;
+                } else {
+                    messageDiv.textContent = 'Passwords do not match';
+                    messageDiv.className = 'text-sm mt-1 text-red-600';
+                    updateBtn.disabled = true;
+                }
+            }
+
+            // Event listeners
+            document.addEventListener('DOMContentLoaded', function() {
+                const newPasswordField = document.getElementById('newPassword');
+                const confirmPasswordField = document.getElementById('confirmPassword');
+
+                // Password match checking
+                newPasswordField.addEventListener('input', checkPasswordMatch);
+                confirmPasswordField.addEventListener('input', checkPasswordMatch);
+
+                // Form validation for the single form
+                document.querySelector('form').addEventListener('submit', function(e) {
+                    const newPassword = newPasswordField.value;
+                    const confirmPassword = confirmPasswordField.value;
+
+                    // Only validate passwords if user is trying to change password
+                    if (newPassword.length > 0 || confirmPassword.length > 0) {
+                        if (newPassword !== confirmPassword) {
+                            e.preventDefault();
+                            alert('Passwords do not match!');
+                            return false;
+                        }
+
+                        if (newPassword.length < 6) {
+                            e.preventDefault();
+                            alert('Password must be at least 6 characters long!');
+                            return false;
+                        }
+                    }
+                });
             });
-        });
-    </script>
+        </script>
 }

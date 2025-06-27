@@ -72,19 +72,6 @@
                     </button>
                 </div>
             </form>
-
-            <!-- Demo accounts info -->
-            <div class="mt-6 pt-6 border-t border-gray-200">
-                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
-                    <h4 class="text-sm font-medium text-blue-800 mb-2">Demo Accounts</h4>
-                    <div class="text-xs text-blue-600 space-y-1">
-                        <p><strong>Admin:</strong> admin@smartsaving.pt / 1234</p>
-                        <p><strong>User:</strong> user@smartsaving.pt / 4321</p>
-                        <p><strong>Owner:</strong> owner@smartsaving.pt / owner123</p>
-                    </div>
-                    <p class="text-xs text-blue-500 mt-2 italic">Click on any account above to auto-fill the form</p>
-                </div>
-            </div>
         </div>
 
         <!-- Additional Options -->
@@ -104,40 +91,6 @@
         // Focus on email field when page loads
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('email').focus();
-        });
-
-        // Demo account quick fill
-        function fillDemo(email, password) {
-            document.getElementById('email').value = email;
-            document.getElementById('password').value = password;
-        }
-
-        // Add click handlers for demo accounts
-        document.addEventListener('DOMContentLoaded', function() {
-            const demoInfo = document.querySelector('.bg-blue-50');
-            if (demoInfo) {
-                const adminText = demoInfo.querySelector('p:nth-child(2)');
-                const userText = demoInfo.querySelector('p:nth-child(3)');
-                const ownerText = demoInfo.querySelector('p:nth-child(4)');
-
-                if (adminText) {
-                    adminText.style.cursor = 'pointer';
-                    adminText.title = 'Click to fill form';
-                    adminText.onclick = () => fillDemo('admin@smartsaving.pt', '1234');
-                }
-
-                if (userText) {
-                    userText.style.cursor = 'pointer';
-                    userText.title = 'Click to fill form';
-                    userText.onclick = () => fillDemo('user@smartsaving.pt', '4321');
-                }
-
-                if (ownerText) {
-                    ownerText.style.cursor = 'pointer';
-                    ownerText.title = 'Click to fill form';
-                    ownerText.onclick = () => fillDemo('owner@smartsaving.pt', 'owner123');
-                }
-            }
         });
     </script>
 }
