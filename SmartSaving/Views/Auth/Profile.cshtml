@@ -1,0 +1,229 @@
+﻿@model SmartSaving.Models.User
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "_Layout";
+}
+
+<div class="max-w-4xl mx-auto py-8">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <!-- Profile Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-8">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <div class="h-20 w-20 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                        <svg class="h-12 w-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="ml-6">
+                    <h1 class="text-2xl font-bold text-white">@Model.Name</h1>
+                    <p class="text-blue-100">@Model.Email</p>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-2">
+                        @Model.Role
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="px-6 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Update Profile Information -->
+                <div>
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Profile Information</h2>
+
+                    <form action="@Url.Action("Profile", "Auth")" method="post" class="space-y-4">
+                        @Html.AntiForgeryToken()
+
+                        <div>
+                            <label for="Name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <div class="mt-1">
+                                @Html.TextBoxFor(m => m.Name, new {
+                                        @class = "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                        required = "required"
+                                    })
+                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-red-600 text-sm mt-1" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="Email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <div class="mt-1">
+                                @Html.TextBoxFor(m => m.Email, new {
+                                        @class = "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                        type = "email",
+                                        required = "required"
+                                    })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-red-600 text-sm mt-1" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit"
+                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out">
+                                Update Profile
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Change Password -->
+                <div>
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Change Password</h2>
+
+                    <form action="@Url.Action("Profile", "Auth")" method="post" class="space-y-4">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Name)
+                        @Html.HiddenFor(m => m.Email)
+
+                        <div>
+                            <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
+                            <div class="mt-1 relative">
+                                <input type="password" id="newPassword" name="newPassword"
+                                       class="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                       placeholder="Enter new password">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePasswordField('newPassword')">
+                                    <svg class="h-5 w-5 text-gray-400" id="newPassword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Leave blank to keep current password</p>
+                        </div>
+
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+                            <div class="mt-1 relative">
+                                <input type="password" id="confirmPassword" name="confirmPassword"
+                                       class="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                       placeholder="Confirm new password">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePasswordField('confirmPassword')">
+                                    <svg class="h-5 w-5 text-gray-400" id="confirmPassword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="password-match-message" class="text-sm mt-1"></div>
+                        </div>
+
+                        <div>
+                            <button type="submit" id="change-password-btn"
+                                    class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                                Change Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Account Information -->
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Account Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-gray-900 mb-2">Account Role</h3>
+                        <p class="text-sm text-gray-600">@Model.Role</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-gray-900 mb-2">Tracker Count</h3>
+                        <p class="text-sm text-gray-600">@(ViewBag.TrackerCount ?? 0) trackers</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-gray-900 mb-2">Member Since</h3>
+                        <p class="text-sm text-gray-600">Recently joined</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Password field toggle functionality
+        function togglePasswordField(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = document.getElementById(fieldId + '-icon');
+
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                `;
+            } else {
+                field.type = 'password';
+                icon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                `;
+            }
+        }
+
+        // Password match validation for profile page
+        function checkPasswordMatch() {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const messageDiv = document.getElementById('password-match-message');
+            const changeBtn = document.getElementById('change-password-btn');
+
+            if (confirmPassword.length === 0 && newPassword.length === 0) {
+                messageDiv.textContent = '';
+                changeBtn.disabled = false;
+                return;
+            }
+
+            if (newPassword.length > 0 && confirmPassword.length === 0) {
+                messageDiv.textContent = 'Please confirm your password';
+                messageDiv.className = 'text-sm mt-1 text-yellow-600';
+                changeBtn.disabled = true;
+                return;
+            }
+
+            if (newPassword === confirmPassword) {
+                messageDiv.textContent = 'Passwords match ✓';
+                messageDiv.className = 'text-sm mt-1 text-green-600';
+                changeBtn.disabled = false;
+            } else {
+                messageDiv.textContent = 'Passwords do not match';
+                messageDiv.className = 'text-sm mt-1 text-red-600';
+                changeBtn.disabled = true;
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const newPasswordField = document.getElementById('newPassword');
+            const confirmPasswordField = document.getElementById('confirmPassword');
+
+            // Password match checking
+            newPasswordField.addEventListener('input', checkPasswordMatch);
+            confirmPasswordField.addEventListener('input', checkPasswordMatch);
+
+            // Form validation for password change
+            const passwordForm = document.querySelector('form:nth-of-type(2)');
+            passwordForm.addEventListener('submit', function(e) {
+                const newPassword = newPasswordField.value;
+                const confirmPassword = confirmPasswordField.value;
+
+                if (newPassword.length > 0) {
+                    if (newPassword !== confirmPassword) {
+                        e.preventDefault();
+                        alert('Passwords do not match!');
+                        return false;
+                    }
+
+                    if (newPassword.length < 6) {
+                        e.preventDefault();
+                        alert('Password must be at least 6 characters long!');
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+}

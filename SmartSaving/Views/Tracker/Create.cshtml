@@ -1,0 +1,164 @@
+﻿@model SmartSaving.Models.Tracker
+@{
+    ViewBag.Title = "Create Tracker";
+    Layout = "_Layout";
+}
+
+<div class="max-w-2xl mx-auto py-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Create New Tracker</h1>
+        <p class="text-gray-600 mt-2">Create a new monthly expense tracker to manage your finances</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white shadow-lg rounded-lg p-8">
+        <form action="@Url.Action("Create", "Tracker")" method="post" class="space-y-6">
+            @Html.AntiForgeryToken()
+
+            <div>
+                <label for="Date" class="block text-sm font-medium text-gray-700 mb-2">
+                    Tracker Date
+                </label>
+                <div class="mt-1">
+                    @Html.TextBoxFor(m => m.Date, new {
+                            @class = "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                            type = "date",
+                            required = "required",
+                            value = DateTime.Now.ToString("yyyy-MM-dd")
+                        })
+                    @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-red-600 text-sm mt-1" })
+                </div>
+                <p class="mt-1 text-xs text-gray-500">
+                    Select the date for this expense tracker (typically the start of a month)
+                </p>
+            </div>
+
+            <!-- Quick Date Selection -->
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="text-sm font-medium text-gray-700 mb-3">Quick Select</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button type="button" onclick="setDate('current-month')"
+                            class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-3 py-2 rounded text-sm transition duration-150 ease-in-out">
+                        This Month
+                    </button>
+                    <button type="button" onclick="setDate('next-month')"
+                            class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-3 py-2 rounded text-sm transition duration-150 ease-in-out">
+                        Next Month
+                    </button>
+                    <button type="button" onclick="setDate('today')"
+                            class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-3 py-2 rounded text-sm transition duration-150 ease-in-out">
+                        Today
+                    </button>
+                    <button type="button" onclick="setDate('custom')"
+                            class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-3 py-2 rounded text-sm transition duration-150 ease-in-out">
+                        Custom
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-blue-800">Tracker Preview</h3>
+                        <p class="text-sm text-blue-700 mt-1">
+                            <span id="preview-text">Select a date to see the tracker preview</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-between pt-6">
+                <a href="@Url.Action("Index", "Tracker")"
+                   class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out">
+                    Cancel
+                </a>
+                <button type="submit"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-150 ease-in-out">
+                    Create Tracker
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Help Section -->
+    <div class="mt-8 bg-gray-50 rounded-lg p-6">
+        <h3 class="text-lg font-medium text-gray-900 mb-3">What is a Tracker?</h3>
+        <div class="text-sm text-gray-600 space-y-2">
+            <p>• A tracker helps you monitor your income and expenses for a specific period</p>
+            <p>• Each tracker typically represents a month or specific time period</p>
+            <p>• You can add multiple income and expense transactions to each tracker</p>
+            <p>• Track your financial balance and see where your money is going</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function setDate(type) {
+            const dateInput = document.getElementById('Date');
+            const previewText = document.getElementById('preview-text');
+            const today = new Date();
+            let selectedDate;
+
+            switch(type) {
+                case 'current-month':
+                    selectedDate = new Date(today.getFullYear(), today.getMonth(), 1);
+                    break;
+                case 'next-month':
+                    selectedDate = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+                    break;
+                case 'today':
+                    selectedDate = today;
+                    break;
+                case 'custom':
+                    dateInput.focus();
+                    return;
+                default:
+                    selectedDate = today;
+            }
+
+            // Format date for input (YYYY-MM-DD)
+            const formattedDate = selectedDate.toISOString().split('T')[0];
+            dateInput.value = formattedDate;
+
+            // Update preview
+            updatePreview(selectedDate);
+        }
+
+        function updatePreview(date) {
+            const previewText = document.getElementById('preview-text');
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-US', options);
+
+            previewText.textContent = `Tracker for ${formattedDate}`;
+        }
+
+        // Update preview when date input changes
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('Date');
+
+            // Set initial preview
+            if (dateInput.value) {
+                updatePreview(new Date(dateInput.value));
+            }
+
+            // Update preview on date change
+            dateInput.addEventListener('change', function() {
+                if (this.value) {
+                    updatePreview(new Date(this.value));
+                }
+            });
+
+            // Focus on date input when page loads
+            dateInput.focus();
+        });
+    </script>
+}

@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - SmartSaving</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-50 flex flex-col">
+    <!-- Header/Banner -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo/Brand -->
+                <div class="flex items-center">
+                    <a href="@Url.Action("Index", "Home")" class="text-2xl font-bold text-blue-600 hover:text-blue-700">
+                        SmartSaving
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="@Url.Action("Index", "Home")" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        Home
+                    </a>
+
+                    @if (ViewBag.User != null && ((SmartSaving.Models.User)ViewBag.User).Email != "guest@smart.saving.pt") {
+                        <a href="@Url.Action("Index", "Tracker")" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                            Trackers
+                        </a>
+                    }
+                </nav>
+
+                <!-- User Menu -->
+                <div class="hidden md:flex items-center space-x-4">
+                    @if (ViewBag.User != null && ((SmartSaving.Models.User)ViewBag.User).Email != "guest@smart.saving.pt") {
+                        <!-- Authenticated User Menu -->
+                        <div class="relative group">
+                            <button class="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium focus:outline-none">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                @((ViewBag.User as SmartSaving.Models.User)?.Name?.ToString() ?? "User")
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <!-- Dropdown Menu -->
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <a href="@Url.Action("Profile", "Auth")" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    My Profile
+                                </a>
+                                @if (ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin) {
+                                    <a href="@Url.Action("Index", "Admin")" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        Admin Panel
+                                    </a>
+                                }
+                                <div class="border-t border-gray-100"></div>
+                                <a href="@Url.Action("Logout", "Auth")" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    Logout
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    else {
+                        <!-- Guest User Menu -->
+                        <a href="@Url.Action("Login", "Auth")" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                            Login
+                        </a>
+                        <a href="@Url.Action("Register", "Auth")" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                            Register
+                        </a>
+                    }
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-700 hover:text-blue-600 focus:outline-none"
+                            onclick="toggleMobileMenu()">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <div class="space-y-1">
+                    <a href="@Url.Action("Index", "Home")" class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium">
+                        Home
+                    </a>
+
+                    @if (ViewBag.User != null && ((SmartSaving.Models.User)ViewBag.User).Email != "guest@smart.saving.pt") {
+                        <a href="@Url.Action("Index", "Tracker")" class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium">
+                            Trackers
+                        </a>
+                        <a href="@Url.Action("Profile", "Auth")" class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium">
+                            My Profile
+                        </a>
+                        @if (ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin) {
+                            <a href="@Url.Action("Index", "Admin")" class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium">
+                                Admin Panel
+                            </a>
+                        }
+                        <div class="border-t border-gray-200 my-2"></div>
+                        <a href="@Url.Action("Logout", "Auth")" class="block text-red-600 hover:text-red-700 px-3 py-2 rounded-md text-base font-medium">
+                            Logout
+                        </a>
+                    }
+                    else {
+                        <a href="@Url.Action("Login", "Auth")" class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium">
+                            Login
+                        </a>
+                        <a href="@Url.Action("Register", "Auth")" class="block bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-base font-medium mx-3 mt-2">
+                            Register
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    @if (ViewBag.Success != null) {
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded relative mx-4 mt-4" role="alert">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm">@ViewBag.Success</p>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (ViewBag.Error != null) {
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative mx-4 mt-4" role="alert">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm">@ViewBag.Error</p>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (ViewBag.Warning != null) {
+        <div class="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-3 rounded relative mx-4 mt-4" role="alert">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm">@ViewBag.Warning</p>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="border-t border-gray-700 py-8 text-center text-gray-300">
+            <p>&copy; @DateTime.Now.Year SmartSaving. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu toggle and dropdown -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-menu');
+            const button = event.target.closest('button');
+
+            if (!button && !menu.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Auto-hide flash messages after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('[role="alert"]');
+            flashMessages.forEach(function(message) {
+                setTimeout(function() {
+                    message.style.transition = 'opacity 0.5s ease-in-out';
+                    message.style.opacity = '0';
+                    setTimeout(function() {
+                        message.remove();
+                    }, 500);
+                }, 5000);
+            });
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,282 @@
+﻿@model SmartSaving.Models.User
+@{
+    ViewBag.Title = "Register";
+    Layout = "_Layout";
+}
+
+<div class="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div class="text-center">
+            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+                Create your account
+            </h2>
+            <p class="mt-2 text-sm text-gray-600">
+                Or
+                <a href="@Url.Action("Login", "Auth")" class="font-medium text-blue-600 hover:text-blue-500">
+                    sign in to your existing account
+                </a>
+            </p>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-8">
+            <form class="space-y-6" action="@Url.Action("Register", "Auth")" method="post">
+                @Html.AntiForgeryToken()
+
+                <div>
+                    <label for="Name" class="block text-sm font-medium text-gray-700">
+                        Full Name
+                    </label>
+                    <div class="mt-1">
+                        @Html.TextBoxFor(m => m.Name, new {
+                                @class = "appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm",
+                                placeholder = "Enter your full name",
+                                required = "required"
+                            })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-red-600 text-sm mt-1" })
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Email" class="block text-sm font-medium text-gray-700">
+                        Email address
+                    </label>
+                    <div class="mt-1">
+                        @Html.TextBoxFor(m => m.Email, new {
+                                @class = "appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm",
+                                placeholder = "Enter your email address",
+                                type = "email",
+                                required = "required"
+                            })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-red-600 text-sm mt-1" })
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Password" class="block text-sm font-medium text-gray-700">
+                        Password
+                    </label>
+                    <div class="mt-1 relative">
+                        @Html.PasswordFor(m => m.Password, new {
+                                @class = "appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm",
+                                placeholder = "Enter your password",
+                                required = "required",
+                                id = "password"
+                            })
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePassword('password')">
+                            <svg class="h-5 w-5 text-gray-400" id="password-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-red-600 text-sm mt-1" })
+                    </div>
+                    <p class="mt-1 text-xs text-gray-500">Password must be at least 6 characters long.</p>
+                </div>
+
+                <div>
+                    <label for="confirmPassword" class="block text-sm font-medium text-gray-700">
+                        Confirm Password
+                    </label>
+                    <div class="mt-1 relative">
+                        <input type="password" name="confirmPassword" id="confirmPassword" required
+                               class="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                               placeholder="Confirm your password">
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePassword('confirmPassword')">
+                            <svg class="h-5 w-5 text-gray-400" id="confirmPassword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="password-match-message" class="text-sm mt-1"></div>
+                </div>
+
+                <!-- Password Strength Indicator -->
+                <div id="password-strength" class="hidden">
+                    <div class="text-xs text-gray-600 mb-1">Password strength:</div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="strength-bar" class="h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                    <div id="strength-text" class="text-xs mt-1"></div>
+                </div>
+
+                <div class="flex items-center">
+                    <input id="terms" name="terms" type="checkbox" required
+                           class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="terms" class="ml-2 block text-sm text-gray-900">
+                        I agree to the
+                        <a href="#" class="text-blue-600 hover:text-blue-500">Terms of Service</a>
+                        and
+                        <a href="#" class="text-blue-600 hover:text-blue-500">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <div>
+                    <button type="submit" id="register-btn"
+                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <svg class="h-5 w-5 text-blue-500 group-hover:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6z"></path>
+                            </svg>
+                        </span>
+                        Create Account
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Additional Options -->
+        <div class="text-center">
+            <p class="text-sm text-gray-600">
+                Already have an account?
+                <a href="@Url.Action("Login", "Auth")" class="font-medium text-blue-600 hover:text-blue-500">
+                    Sign in here
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Password toggle functionality
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = document.getElementById(fieldId + '-icon');
+
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                `;
+            } else {
+                field.type = 'password';
+                icon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                `;
+            }
+        }
+
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strength-bar');
+            const strengthText = document.getElementById('strength-text');
+            const strengthContainer = document.getElementById('password-strength');
+
+            if (password.length === 0) {
+                strengthContainer.classList.add('hidden');
+                return;
+            }
+
+            strengthContainer.classList.remove('hidden');
+
+            let score = 0;
+            let feedback = [];
+
+            // Length check
+            if (password.length >= 8) score += 25;
+            else feedback.push('at least 8 characters');
+
+            // Number check
+            if (/\d/.test(password)) score += 25;
+            else feedback.push('numbers');
+
+            // Lowercase check
+            if (/[a-z]/.test(password)) score += 25;
+            else feedback.push('lowercase letters');
+
+            // Uppercase or special characters
+            if (/[A-Z]/.test(password) || /[^A-Za-z0-9]/.test(password)) score += 25;
+            else feedback.push('uppercase letters or special characters');
+
+            // Update visual indicator
+            strengthBar.style.width = score + '%';
+
+            if (score < 50) {
+                strengthBar.className = 'h-2 rounded-full transition-all duration-300 bg-red-500';
+                strengthText.textContent = 'Weak - Add: ' + feedback.join(', ');
+                strengthText.className = 'text-xs mt-1 text-red-600';
+            } else if (score < 75) {
+                strengthBar.className = 'h-2 rounded-full transition-all duration-300 bg-yellow-500';
+                strengthText.textContent = 'Fair - Add: ' + feedback.join(', ');
+                strengthText.className = 'text-xs mt-1 text-yellow-600';
+            } else if (score < 100) {
+                strengthBar.className = 'h-2 rounded-full transition-all duration-300 bg-blue-500';
+                strengthText.textContent = 'Good - Add: ' + feedback.join(', ');
+                strengthText.className = 'text-xs mt-1 text-blue-600';
+            } else {
+                strengthBar.className = 'h-2 rounded-full transition-all duration-300 bg-green-500';
+                strengthText.textContent = 'Strong password!';
+                strengthText.className = 'text-xs mt-1 text-green-600';
+            }
+        }
+
+        // Password match checker
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const messageDiv = document.getElementById('password-match-message');
+            const registerBtn = document.getElementById('register-btn');
+
+            if (confirmPassword.length === 0) {
+                messageDiv.textContent = '';
+                messageDiv.className = 'text-sm mt-1';
+                return;
+            }
+
+            if (password === confirmPassword) {
+                messageDiv.textContent = 'Passwords match ✓';
+                messageDiv.className = 'text-sm mt-1 text-green-600';
+                registerBtn.disabled = false;
+            } else {
+                messageDiv.textContent = 'Passwords do not match';
+                messageDiv.className = 'text-sm mt-1 text-red-600';
+                registerBtn.disabled = true;
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('confirmPassword');
+
+            // Focus on name field when page loads
+            document.getElementById('Name').focus();
+
+            // Password strength checking
+            passwordField.addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+                checkPasswordMatch();
+            });
+
+            // Password match checking
+            confirmPasswordField.addEventListener('input', checkPasswordMatch);
+
+            // Form validation
+            document.querySelector('form').addEventListener('submit', function(e) {
+                const password = passwordField.value;
+                const confirmPassword = confirmPasswordField.value;
+                const terms = document.getElementById('terms').checked;
+
+                if (password !== confirmPassword) {
+                    e.preventDefault();
+                    alert('Passwords do not match!');
+                    return false;
+                }
+
+                if (!terms) {
+                    e.preventDefault();
+                    alert('Please accept the Terms of Service and Privacy Policy!');
+                    return false;
+                }
+
+                if (password.length < 6) {
+                    e.preventDefault();
+                    alert('Password must be at least 6 characters long!');
+                    return false;
+                }
+            });
+        });
+    </script>
+}
